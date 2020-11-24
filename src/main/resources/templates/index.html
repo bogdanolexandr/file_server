@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+	integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+	integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+	crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>file server</title>
+
+
+
+<link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+
+<!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+<script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
+
+
+</head>
+<body>
+
+	<br>
+	<div style="width: 450px; margin: auto">
+
+		<p>[[#{upload_file}]]</p>
+		<form action="/upload" enctype="multipart/form-data" method="post">
+			<input type="file" name="file" /> <input type="submit"
+				th:value="#{upload}" />
+		</form>
+		<br> <br>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>[[#{file_name}]]</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${files.empty}">
+					<td colspan="2">No files Available</td>
+				</tr>
+				<tr th:each="file : ${files}">
+					<td><a th:href="@{/get(fileName=${file})}">[[${file}]]</a></td>
+					<td><a th:href="@{/delete(fileName=${file})}">[[#{del_file}]]</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
