@@ -36,6 +36,10 @@ public class FileController {
 	
 	@PostMapping("/upload")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes attributes) {
+		if(file.isEmpty()) {
+			return "redirect:/";
+		}
+		
 		fileManager.save(file);
 		return "redirect:/ ";
 	}
